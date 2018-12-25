@@ -9,7 +9,7 @@
   "scripts": {
     "standalone": "rm -rf standalone; yarn build:lib && yarn pkg package.json --out-path standalone && node scripts/standalone.js",
     "standalone:brew-sha": "shasum -a 256 standalone/*.macos.*.tar.gz",
-    "build:lib": "babel src --out-dir lib --ignore src/__tests__ && cp -r src/templates lib/",
+    "build:lib": "babel src --out-dir lib --ignore src/__tests__ && shx cp -r src/templates lib/",
     "build": "npm run build:lib",
     "release": "yarn build && git commit -am 'build'; yarn version && git push --tags && git push origin master",
     "test": "yarn test:code && yarn test:require",
@@ -49,6 +49,7 @@
     "goddamn-javascript-eslint": "^1.0.1",
     "jest": "^22.1.4",
     "pkg": "^4.3.0",
+    "shx": "^0.3.2",
     "time-require": "^0.1.2"
   },
   "jest": {
