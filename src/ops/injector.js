@@ -16,7 +16,11 @@ const injector = (action: RenderedAction, content: string): string => {
   } = action
   const lines = content.split('\n')
   //eslint-disable-next-line
-  const shouldSkip = skip_if && !!L.find(lines, _ => _.match(skip_if))
+  const shouldSkip = skip_if && !!L.find(lines, _ => {
+    let reg = new RegExp(skip_if, 'gm');
+    // _.match(skip_if) //old
+    return reg.exec(_)
+  })
 
   if (!shouldSkip) {
     const idx = indexByLocation(attributes, lines)
